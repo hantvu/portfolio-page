@@ -1,0 +1,689 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+		<title>Han Vu's interactive version</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" / >
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+		<!-- THESE ARE THE CSS FILES I ADDED -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Domine:400,700"/>
+
+        <!-- THESE ARE THE JAVASCRIPT FILES I ADDED -->
+
+		<script type="text/javascript" src="http://www.columbiamissourian.com/app/projects/Project_files/js/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="http://www.columbiamissourian.com/app/projects/Project_files/js/jquery-ui-1.10.2.custom.js"></script>
+		<script type="text/javascript" src="http://www.columbiamissourian.com/app/projects/Project_files/js/jquery.ui.tooltip.js"></script>
+		<script type="text/javascript" src="http://www.columbiamissourian.com/app/projects/Project_files/js/jquery.cycle.all.js"></script>
+
+
+		<!-- THE CSS STYLES START HERE -->
+		<style>
+			/*! jQuery UI - v1.10.2 - 2013-03-17
+			* http://jqueryui.com
+			* Includes: jquery.ui.core.css, jquery.ui.resizable.css, jquery.ui.selectable.css, jquery.ui.accordion.css, jquery.ui.autocomplete.css, jquery.ui.button.css, jquery.ui.datepicker.css, jquery.ui.dialog.css, jquery.ui.menu.css, jquery.ui.progressbar.css, jquery.ui.slider.css, jquery.ui.spinner.css, jquery.ui.tabs.css, jquery.ui.tooltip.css
+			* Copyright 2013 jQuery Foundation and other contributors Licensed MIT */
+
+			h1 {
+				font-size: 3em;
+			    line-height: 1.4em;
+			}
+
+			p.body, a {
+				color: black;
+			    font-size: 16px;
+			    line-height: 27px;
+			    margin-bottom: 24px;
+			}
+
+			.domine, h3 {
+				 font-family:  'Domine', serif;
+			}
+
+			.base {
+				background-attachment: fixed;
+				height: 400px;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+
+			.clear {clear: both;}
+
+			/* INTRO SECTION */
+
+			.coveropener {
+				position: relative;
+				background-repeat: no-repeat;
+  			background-position: center;
+				background-size: cover;
+  			height: 100vh;
+			}
+
+			.centered {
+				  margin: 0;
+				  position: absolute;
+				  top: 50%;
+				  left: 50%;
+				  -ms-transform: translate(-50%, -50%);
+				  transform: translate(-50%, -50%);
+				max-width: 684px;
+				max-height: 400px;
+				width: 90%;
+				height: 90%;
+			    text-align: center;
+			    font-family: inerit;
+			    line-height: 1.5em;
+			    padding: 5%;
+			}
+
+			.move {
+			  opacity: 0;
+			  transform: translate(0, 10vh);
+			  transition: all 3s;
+			}
+
+			.move.visible {
+			  opacity: 1;
+			  transform: translate(0, 0);
+			}
+
+
+			.start.fade-in {
+			animation: fadeIn ease 2s;
+			-webkit-animation: fadeIn ease 2s;
+			-moz-animation: fadeIn ease 2s;
+			-o-animation: fadeIn ease 2s;
+			-ms-animation: fadeIn ease 2s;
+			}
+			@keyframes fadeIn {
+			0% {opacity:0;}
+			100% {opacity:1;}
+			}
+
+			@-moz-keyframes fadeIn {
+			0% {opacity:0;}
+			100% {opacity:1;}
+			}
+
+			@-webkit-keyframes fadeIn {
+			0% {opacity:0;}
+			100% {opacity:1;}
+			}
+
+			@-o-keyframes fadeIn {
+			0% {opacity:0;}
+			100% {opacity:1;}
+			}
+
+			@-ms-keyframes fadeIn {
+			0% {opacity:0;}
+			100% {opacity:1;}
+			}
+
+			.start.fade-out {
+			animation: fadeOut ease 3s forwards;
+			-webkit-animation: fadeOut ease 3s forwards;
+			-moz-animation: fadeOut ease 3s forwards;
+			-o-animation: fadeOut ease 3s forwards;
+			-ms-animation: fadeOut ease 3s forwards;
+			}
+			@keyframes fadeOut {
+			0% {opacity:1;}
+			100% {opacity:0;}
+
+			}
+
+			@-moz-keyframes fadeOut {
+			0% {opacity:1;}
+			100% {opacity:0;}
+			}
+
+			@-webkit-keyframes fadeOut {
+			0% {opacity:1;}
+			100% {opacity:0;}
+			}
+
+			@-o-keyframes fadeOut {
+			0% {opacity:1;}
+			100% {opacity:0;}
+			}
+
+			@-ms-keyframes fadeOut {
+			0% {opacity:1;}
+			100% {opacity:0;}
+			}
+
+			/* ALL ABOUT THE GRAPHIC DIV */
+			.graphic{
+				width: 100%;
+			    max-width: 630px;
+			    height: auto;
+			    margin: 0 auto 0 auto ;
+			}
+			.graphicmedium{
+			    max-width: 960px;
+			    width: 100%;
+			    height: auto;
+			    margin: 0 auto 0 auto ;
+			}
+			.graphicwide{
+			    max-width: 1200px;
+			    width: 100%;
+			    height: auto;
+			    margin: 0 auto 0 auto ;
+			}
+
+			.graphic h4, .graphicwide h4, .graphicmedium h4  {
+			    padding: 0;
+			    margin: 50px 0 4px 0;
+			    font-family:  'Domine', serif;
+			    font-weight: bold;
+			    font-size: 1.5em;
+			    line-height: 1.5em;
+			    z-index: 2000;
+			    }
+
+			.graphic p, p {
+			    width: 100%;
+			    padding: 5px 0;
+			    margin: 0 0 8px 0;
+			    font-family:  'Domine', serif;
+			    font-size: 1em;
+			    line-height: 1.5em;
+			    z-index: 2000;
+			    }
+
+			.graphic img, .graphicmedium img, .graphicwide img{
+			    width: 100%;
+			    height: auto;
+			    z-index: 1000;
+			    }
+
+			.graphic div{
+			    /*width: 100%;*/
+			    height: auto;
+			    z-index: 1000;
+			}
+
+			.graphicwide video{
+					width: 100% !important;
+					margin: auto;
+			}
+
+
+			/*Tableau style */
+			.tableauPlaceholder iframe {
+				margin: auto !important;
+			}
+
+			/* 1-2-3 PANEL STYLES */
+
+			.tab-nav a {
+			    background: none repeat scroll 0 0 white;
+			    border: 1px solid black;
+			    color: black;
+			    display: inline-block;
+			    font-size: 12px;
+			    font-weight: bold;
+			    margin: 0 4px 0 0;
+			    border-radius: 100%;
+			    padding: 4px 4px;
+			    width: 14px;
+			    text-align: center;
+			    text-decoration: none;
+			    font-family: sans-serif;
+			    line-height: 14px;
+			}
+
+			#next_panel {
+				width: 70px;
+				border-radius: 15px;
+			}
+
+			.tab-nav a.activeSlide {
+			    background: none repeat scroll 0 0 white;
+			    color: black;
+			}
+
+			.tab-nav {
+			    width: auto !important;
+			    float: left;
+			    margin: 10px 10px 0 0;
+			    height: 44px;
+			}
+
+			.tab-wrapper {
+			    margin: 0 auto -1px auto;
+			    height: 20px;
+			}
+
+			#panel_graphic {
+			    margin: 10px 0 0 0;
+			    position: relative;
+			    width: 100% !important;
+			}
+
+
+
+			.panel {
+			    position: relative;
+			    display: block;
+			    left: 0;
+			    opacity: 1;
+			    padding: 10px;
+			    z-index: 4;
+			    background-color: white;
+					width: 100%;
+			}
+
+			.title{
+				font-family: 'Open Sans', sans-serif;
+				font-size: 1em;
+				width: 450px;
+				margin-left: 40px;
+			}
+
+
+			/* TABBED PANEL GRAPHIC */
+
+			#slideshow-wrapper {margin: 20px 0 10px 0; color: black;}
+			#slideshow-nav  {height: auto;float: left;z-index: 1000;}
+			#slideshow-nav li {
+			    border: 1px solid #999999;
+			    border-bottom: 1px solid white;
+			    border-radius: 10px 10px 0 0;
+			    padding: 10px 10px 5px 10px;
+			    display: block;
+			    float: left;
+			    zoom: 1;
+			    filter: alpha(opacity=50);
+			    opacity: 0.5;
+			    margin: 0 0 0 5px;
+			    width: 15%;
+			    font-family: arial, sans-serif;
+			    font-size: 12px;
+			    line-height: 14px;
+			    text-align: center;
+			    height: auto;
+			    vertical-align: top;
+			    background-color: none;
+					color: black;
+			}
+
+			#slideshow-nav li img {width: 100%;}
+			.nav-container {z-index: 2000;}
+			#slideshow-nav li.first {margin-left: 6px;}
+			#slideshow-nav li:hover {zoom: 1;filter: alpha(opacity=100);opacity: 1; background-color: white;}
+			#slideshow-nav li.activeSlide  {filter:alpha(opacity=100);opacity:1; background-color: white;font-weight: bold;border-bottom:2px solid white;z-index: 1000;}
+			#slidescontainer {position: relative;overflow: hidden;}
+			#slideshow {position: relative;width: 100% !important;}
+			.slide {width: 100% !important; position: absolute;text-align: left;padding: 10px 20px 0 20px; display: none;background-color: white;z-index: 1;}
+
+			.horiz-line1 {margin-top: -1px;border-top: 1px solid #999999;z-index:100;}
+			#prev-btn, #next-btn {display: inline;float: left;margin-top: 10px;padding: 0px 0px 0 10px;width: 31px;text-align: left;vertical-align: middle;z-index: 20;}
+			#next-btn {text-align: right;}
+			#arrowfull {zoom: 1;filter: alpha(opacity=100);opacity: 1;}
+			#arrowfaint {zoom: 1;filter: alpha(opacity=20);opacity: 0.4;}
+
+			/* TABBED PANEL WITH IMAGES */
+
+			#slideshow-wrapper2 {margin: 20px 0 10px 0; color: black;}
+			#slideshow-nav2  {height: auto;float: left;z-index: 1000;}
+			#slideshow-nav2 li {
+			    border: 1px solid #999999;
+			    border-bottom: 1px solid white;
+			    border-radius: 10px 10px 0 0;
+			    padding: 10px 10px 5px 10px;
+			    display: block;
+			    float: left;
+			    zoom: 1;
+			    filter: alpha(opacity=50);
+			    opacity: 0.5;
+			    margin: 0 0 0 5px;
+			    width: 15%;
+			    font-family: arial, sans-serif;
+			    font-size: 12px;
+			    line-height: 14px;
+			    text-align: center;
+			    height: auto;
+			    vertical-align: top;
+			    background-color: white;
+			    color: black;
+			}
+
+			#slideshow-nav2 li img {width: 100%; color: white; padding-top: 10px;}
+			.nav-container2 {z-index: 2000;}
+			#slideshow-nav2 li.first {margin-left: 6px;}
+			#slideshow-nav2 li:hover {zoom: 1;filter: alpha(opacity=100);opacity: 1; background-color: white;}
+			#slideshow-nav2 li.activeSlide  {filter:alpha(opacity=100);opacity:1; background-color: white;font-weight: bold;border-bottom:2px solid white ;z-index: 1000;}
+			#slidescontainer2 {position: relative; overflow: hidden;}
+			#slidewithimages { position: relative; width: 100% !important;}
+			.slidewithimage {position: absolute;text-align: left;padding: 0 20px; display: none;background-color: white;z-index: 1;}
+
+			.horiz-line1 {margin-top: -1px;border-top: 1px solid #999999;z-index:100;}
+			#prev-btn, #next-btn {display: inline;float: left;margin-top: 10px;padding: 0px 0px 0 10px;width: 31px;text-align: left;vertical-align: middle;z-index: 20;}
+			#next-btn {text-align: right;}
+			#arrowfull {zoom: 1;filter: alpha(opacity=100);opacity: 1;}
+			#arrowfaint {zoom: 1;filter: alpha(opacity=20);opacity: 0.4;}
+
+			/* NUMBERED DOTS */
+
+				.dots{
+				    position: relative;
+				}
+
+				.dot {
+				    background-color: #DF7527;
+				    color: white;
+				    text-align: center;
+				    vertical-align: middle;
+				    padding: 0;
+				    line-height: 20px;
+				    font-family: sans-serif;
+				    font-size: 14px;
+				    width: 20px !important;
+				    height: 20px !important;
+				    border-radius: 20px;
+				    border: 1px solid #ffffff;
+				    box-shadow: 1px 1px 1px #000000;
+				    cursor: pointer;
+				    z-index: 999;
+				}
+
+				.dots #parent {
+				  position: absolute;
+				  width: auto;
+				}
+
+				#parent a {
+					text-decoration: none;
+				}
+
+				#popup {
+					position: absolute;
+					background-origin: bottom left;
+					left: -75px;
+					bottom: 45px;
+
+				  border: solid 1px #666666;
+				  background-color: white;
+				  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+				  padding: 10px;
+				  font-family: 'Open Sans', sans-serif;
+				  font-size: 0.9em;
+				  line-height: 1.2em;
+				  width: 160px;
+				  color: black;
+				}
+
+				#parent #popup::after {
+				  content: "";
+				  position: absolute;
+				  top: 100%;
+				  left: 45%;
+				  margin-left: -5px;
+				  border-width: 10px;
+				  border-style: solid;
+				  border-color: black transparent transparent transparent;
+				}
+
+				#popup div {
+					width: 100%;
+					margin: auto;
+				}
+
+				#parent #popup {
+				  display: none;
+				  min-width: 250px;
+				}
+
+				#parent:hover #popup {
+				  display: block;
+				}
+
+				#parent:hover {
+				  z-index: 5000;
+				}
+
+				/* RESPONSIVE STYLE BREAKPOINT REFERENCE
+					big desktops: 1400px;
+					most laptops: 1100px;
+					iPad portrait: 768px;
+					phones: 480px;
+					smaller phones: 300px;*/
+
+				@media screen and (max-width: 1400px){
+					/*use these classes to switch out three levels of images with hard-to-read text*/
+					.hide-desktop {display:block;}
+					.hide-desktop {display:none;}
+					.hide-tablet {display:none;}
+				}
+
+				@media screen and  (max-width: 1100px){
+				}
+
+				@media screen and  (max-width: 768px){
+					.hide-desktop {display:none;}
+					.hide-tablet {display:block;}
+				}
+
+				@media screen and  (max-width: 480px){
+					.hide-desktop {display:none;}
+					.hide-tablet {display:none;}
+					.hide-mobile {display:block;}
+
+					/*making fonts a bit smaller*/
+					.graphic h4 {font-size:1.5em;}
+					.graphic p {font-size:0.9em; line-height: 1.4em;}
+					.graphic {width: 100%; max-width: 1200px;}
+					.centered {max-height: none;}
+				}
+
+				@media screen and  (max-width: 300px){
+					.graphic h4 {font-size:1.5em;}
+					.graphic p {font-size:0.9em; line-height: 1.4em;}
+					.graphic {width: 100%; max-width: 1200px;}
+					.centered {max-height: none;}
+				}
+		</style>
+
+</head>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<!-- THE PAGE YOU SEE STARTS HERE!!!!!!!!!  -->
+		<!-- OPTIONS-YOU DON'T HAVE TO DO THESE:
+				1. If you want a fixed background image behind the whole graphic, add URL between parenthesis below.
+				2. If you would prefer a white template, change the background color to white, and the color to black (that's the color of the text) / -->
+
+<body id="site" class="base" style="background-image: url(); background-color: white; color: black;">
+
+
+
+<!-- BEGIN SINGLE LAYER - SIMPLE IMAGE WITH ROLLOVER -->
+
+			<div class="graphic">
+					<h1>Columbia's changing face</h1>
+					<h3>By Han Vu</h3>
+					<p>Established in 1821, the City of Columbia was home to 600 people in 1830 and now is home to over 126,254 people. Known as a peaceful city, Columbia has consistently ranked among the best cities to live in, with low crime rate, highly educated population, low cost of living, and affordable housing. From 1970 until now, the city has changed for the better in several key aspects, even though the transition process was slow.</p>
+			</div><br>
+<!-- ////change regular to wide for a featured image///-->
+
+							<div class="graphicwide">
+								<img src="images/homecoming.jpg" alt="Mizzou Homecoming 2022; Credit: Columbia Missourian">
+									<figcaption>Mizzou Homecoming 2022 (<i>Photo</i>: Columbia Missourian)</figcaption>
+							</div><!--  Important: background needs to be inside of div.-->
+
+
+
+
+
+<!-- END SINGLE LAYER - SIMPLE IMAGE WITH ROLLOVER -->
+
+<!-- BEGIN SINGLE LAYER - BEFORE/AFTER IMAGE -->
+
+			<div class="graphic">
+					<h4>Columbia is now the 4th most populated cities in Missouri</h4>
+					<p>From 600 people in 1830, the City of Columbia gradually attracted more and more people to come and settle in.
+						The establishment of University of Missouri-Columbia since 1839 played a significant part in the development of the city.</p>
+			</div>
+
+			<div class="graphic move">
+
+					<!-- Go to https://juxtapose.knightlab.com/, upload your photos, and then get the embed code to put below. You may have to change your height once you place it in your document and see how it fits. -->
+					<!iframe frameborder="0" class="juxtapose" width="100%" height="360" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=1d259bae-1ef4-11eb-83c8-ebb5d6f907df"></iframe>
+					<iframe title="Columbia's population over the years" aria-label="Interactive area chart" id="datawrapper-chart-VaFpf" width="100%" height="360" src="https://datawrapper.dwcdn.net/VaFpf/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();
+</script>
+
+			</div>
+
+
+<!-- END SINGLE LAYER - BEFORE/AFTER IMAGE -->
+
+<!-- BEGIN SINGLE LAYER - TIMELINE EXAMPLE -->
+
+				<div class="graphic">
+					<h4>Columbia's population is one of the youngest in the state</h4>
+					<p class="body">Thanks to the large number of Mizzou's students which mostly in their 20s, Columbia's population is always at the younger side of the state.
+					The City's median age slightly increased in the last decade</p>
+					<!-- NOTE: YOU NEED TO ADD HTTP: TO THE FRONT OF THE // IN THE URL OF THE IFRAME -->
+					<div>
+						<iframe title="The City's Median Age is slightly increased" aria-label="Interactive area chart" id="datawrapper-chart-ZxP0X" src="https://datawrapper.dwcdn.net/ZxP0X/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="388"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();</script>
+					</div><br>
+					<div>
+						<img src="images/missouri_median_age.png" alt="Missouri's 2020 median age by counties">
+							<figcaption>The city of Columbia is a part of Boone county, which has a lower median age compared to other parts of the state (<i>Map by Han Vu</i>)</figcaption>
+					</div><br>
+					<div>
+						<p><strong>The City's population structure in 1970 and 2020</strong></p><br>
+						<iframe frameborder="0" class="juxtapose" width="100%" height="300" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=c37d248e-cef9-11ec-b5bb-6595d9b17862"></iframe>
+					</div>
+				</div>
+
+<!-- END SINGLE LAYER - TIMELINE EXAMPLE -->
+
+<!-- BEGIN SINGLE LAYER - DATAWRAPPER EXAMPLE -->
+
+				<div class="graphic">
+						<h4>Highly educated popupation</h4>
+						<p>The city is ranked high on education index, with over 53% of people 25 years and older hold bachelor or higher degrees. In 50 years, the number increased 3.8 folds. The number increased steadily since 1970, but recent decade saw a slow down.</p>
+				</div>
+
+				<div class="graphic move">
+						<div>
+								<!-- Sub out the embded code below for your embed code -->
+									<iframe title="Number of people 25 years and older hold bachelor degree or higher" aria-label="Interactive line chart" id="datawrapper-chart-fKXHX" src="https://datawrapper.dwcdn.net/fKXHX/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();</script>
+								<!-- Sub out the embed code above for your embed code -->
+						</div> <br>
+						<div>
+							<p>Compared to other big cities in the state, Columbia has the highest percentage of people 25 years and older hold bachelor dregree or higher. MU may play a big part on this number.
+								The City also maintains a good ranking in other social aspects.</p>
+							<iframe title="Columbia compared to other big cities in different social aspects 2020" aria-label="Grouped Column Chart" id="datawrapper-chart-HhXB2" src="https://datawrapper.dwcdn.net/HhXB2/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="600"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();</script>
+						</div><br>
+						<div>
+							<p>The unemployment rate has dropped significantly in the last decade, from 6.1% in 2011 to 3.5% in 2020.</p>
+							<iframe title="Unemployment Rate" aria-label="Interactive line chart" id="datawrapper-chart-4sQyz" src="https://datawrapper.dwcdn.net/4sQyz/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();</script>
+						</div>
+
+				</div>
+
+<!-- END SINGLE LAYER - DATAWRAPPER EXAMPLE -->
+
+<!-- BEGIN SINGLE LAYER - TABLEAU EXAMPLE -->
+
+				<div class="graphic">
+						<h4>Increased median income and decreased poverty rate</h4>
+						<p>The City’s household median income increased over 3.9 times since 1980, one of the biggest successes. In 2020, Columbia ranked 4th out of 8 metro areas in the state in term of income, after Kansas, St. Louis, and Jefferson city respectively.</p>
+				</div>
+
+				<div class="graphic move">
+						<div style="max-height:550px;">
+
+							<!-- REPLACE THE CODE BELOW WITH THE EMBED CODE -->
+							<iframe title="Columbia' Household Median Income by Race last decade" aria-label="Interactive line chart" id="datawrapper-chart-Nl76D" src="https://datawrapper.dwcdn.net/Nl76D/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();
+</script>
+							<!-- REPLACE THE CODE ABOVE WITH THE EMBED CODE -->
+
+						</div><br>
+						<div>
+							<p>Tackling poverty is one of the City’s best performances. In recent decade, poverty rate is getting lower and lower year by year, reaching the lowest in 2020 with 8.5 percent. Until 2000. poverty rate is still quite high, but decrease steadily after that.</p>
+							<iframe title="Poverty rate over the years" aria-label="Interactive area chart" id="datawrapper-chart-NfZed" src="https://datawrapper.dwcdn.net/NfZed/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();</script>
+						</div> <br>
+						<div>
+							<p>Affordable housing is one of the aspects Columbia is ranked high among the best cities to live in the U.S. according to various ranking.</p>
+							<iframe title="Median home value of Missouri's big cities in the last decade" aria-label="Interactive line chart" id="datawrapper-chart-AbCrX" src="https://datawrapper.dwcdn.net/AbCrX/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();
+</script>
+						</div>
+				</div>
+
+<!-- END SINGLE LAYER - TABLEAU EXAMPLE -->
+
+
+<!-- BEGIN SINGLE LAYER - - 1-2-3 SEQUENCE -->
+
+			<div class="graphic">
+					<h4>Crime rate</h4>
+					<p>Known as a peaceful city, Columbia’s crime rate per 100.000 people in 2020 has dropped half the number of 1990. However, the number of cleared cases also decreased year by year. The rate of cleared cases over reported cases in 2011 was 32.6%, but decreased to 16.3% in 2020.  </p>
+			</div>
+
+			<div class="graphic move">
+
+				<iframe title="Crime cases reported and cleared over the years" aria-label="Interactive line chart" id="datawrapper-chart-3JLbn" src="https://datawrapper.dwcdn.net/3JLbn/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();</script>
+			</div>
+
+<!-- END SINGLE LAYER - 1-2-3 SEQUENCE -->
+
+<!-- BEGIN SINGLE LAYER - VIDEO WRAPPER -->
+
+			<div class="graphic">
+					<h4>One of the best cities to live in the U.S.</h4>
+					<p>By compiling data for five of the metrics: population density, unemployment rate, housing costs, commute time, and cost-of-living, Business Insider has recently ranked Columbia among <a href="https://www.businessinsider.com/best-places-to-live-in-america-ranked-2020-6" target="_blank">Top 30 best cities to live in after the pandemic</a>.</p>
+			</div>
+
+			<div class="graphic move">
+					<!-- Change image name below, or replace the entire line with embed code. -->
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/iNuJdXu0ZZk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					<figcaption>Introduction to Columbia (<i>Credit</i>: The City of Columbia)</figcaption>
+			</div><br><br>
+			<div class="graphic">
+			<p>Diversity is not the City's strong point since over 70% population is white. Equality is still something the City has to work on while the big gap of household median income still exists.
+			However, the City is still a peaceful place that could be home to anyone trying to work hard.</p>
+		</div><br>
+			<div class="graphicwide">
+				<img src="images/BoochesBar_1970.jpeg" alt="Booches' Bar in 1970; Credit: Mizzou Magazine">
+					<figcaption>Booches' Bar in 1970 (<i>Photo</i>: Columbia Missourian)</figcaption>
+			</div>
+
+
+
+<!-- END SINGLE LAYER - VIDEO WRAPPER -->
+
+
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- END OF GRAPHIC TEMPLATE ELEMENTS  -->
+<!-- DO NOT MODIFY OR DELETE ANYTHING BELOW HERE. -->
+
+				<script>
+					$(document).on("scroll", function() {
+					  var pageTop = $(document).scrollTop();
+					  var pageBottom = pageTop + $(window).height();
+					  var moves = $(".move");
+
+					  for (var i = 0; i < moves.length; i++) {
+					    var move = moves[i];
+
+						if ($(move).position().top < pageBottom) {
+						      $(move).addClass("visible");
+						    } else {
+						      $(move).removeClass("visible");
+						    }
+						}
+
+					});
+				</script>
+
+
+	</body>
+</html>
